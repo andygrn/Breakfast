@@ -1,6 +1,7 @@
 // @andygrn 2013
-function Breakfast(){
+function Breakfast( breakpoint_array ){
 	this.breakpoints = [];
+	this.addBreakPoints( breakpoint_array );
 	var _self = this;
 	window.addEventListener( 'resize', function(){
 		_self.checkBreaks();

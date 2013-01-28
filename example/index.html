@@ -43,11 +43,10 @@
 	<script src="jquery.cycle.lite.js"></script>
 	<script src="../breakfast.js"></script>
 	<script>
-		var bp = new Breakfast();
 		var info1 = document.querySelector( '#bacon' );
 		var info2 = document.querySelector( '#eggs' );
 		var $slideshow = $( '.slideshow' );
-		bp.addBreakPoints( [
+		var bp = new Breakfast( [
 			{
 				max: 700,
 				on: function(){
@@ -62,7 +61,9 @@
 						continuous: true
 					} );
 				}
-			},
+			}
+		] );
+		bp.addBreakPoints( [
 			{
 				min: 500,
 				max: 1000,
