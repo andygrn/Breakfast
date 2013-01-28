@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Breakfast</title>
+	<style>
+		body{text-align:center; overflow-x:hidden; padding:50px 0; font-family:monospace;}
+		.ruler{position:absolute; top:0; border-left:1px solid #000; padding:4px; height:20px;}
+		#l500{left:500px;}
+		#l700{left:700px;}
+		#l1000{left:1000px;}
+		.info{margin-bottom:40px;}
+		.slideshow{margin:0 auto; width:400px;}
+		.slideshow img{display:block;}
+		#bacon,
+		#eggs{color:#d00;}
+	</style>
+</head>
+<body>
+
+	<div class="info">
+		<h1>Breakfast</h1>
+
+		<p>Tasty screen-width-specific javascript</p>
+		<p>Like media queries for functions</p>
+		<p>Try resizing the window</p>
+
+		<p id="bacon"></p>
+		<p id="eggs"></p>
+	</div>
+
+	<div class="ruler" id="l500">500px</div>
+	<div class="ruler" id="l700">700px</div>
+	<div class="ruler" id="l1000">1000px</div>
+
+	<div class="slideshow">
+		<img src="http://lorempixel.com/400/300/abstract" width="400" height="300">
+		<img src="http://lorempixel.com/400/300/people" width="400" height="300">
+		<img src="http://lorempixel.com/400/300/sports" width="400" height="300">
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="jquery.cycle.lite.js"></script>
+	<script src="../breakfast.js"></script>
+	<script>
+		var bp = new Breakfast();
+		var info1 = document.querySelector( '#bacon' );
+		var info2 = document.querySelector( '#eggs' );
+		var $slideshow = $( '.slideshow' );
+		bp.addBreakPoints( [
+			{
+				max: 700,
+				on: function(){
+					info1.innerHTML = 'between 0 and 700';
+					$slideshow.cycle( 'destroy' ); // Ignore/destroy the slideshow for small screens
+					$slideshow.attr( 'style', '' );
+					$slideshow.find( 'img' ).attr( 'style', '' );
+				},
+				off: function(){
+					info1.innerHTML = 'not between 0 and 700';
+					$slideshow.cycle( { // Create the slideshow for large screens
+						continuous: true
+					} );
+				}
+			},
+			{
+				min: 500,
+				max: 1000,
+				on: function(){
+					info2.innerHTML = 'between 500 and 1000';
+					document.body.style.backgroundColor = '#9ff'; // Just an example, you would obviously use CSS media queries for this
+				},
+				off: function(){
+					info2.innerHTML = 'not between 500 and 1000';
+					document.body.style.backgroundColor = '#ff9'; // Just an example, you would obviously use CSS media queries for this
+				}
+			}
+		] );
+	</script>
+	
+</body>
+</html>
