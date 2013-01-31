@@ -20,9 +20,10 @@ Breakfast eats breakpoint objects. A breakpoint object looks like this:
 	}
 ```
 
-`min` and `max` are the minimum and maximum screen widths (in pixels), between which the `on` function will be called. If the width is outside of this range, the `off` function is called.
+`min` and `max` are the minimum and maximum screen widths (in pixels), between which the `on` function will be called. If the width is outside of this range, the `off` function is called. Width ranges can overlap with other breakpoints.
 
 Breakpoints are run immediately, and re-run if the window is resized. An `on` or `off` function will only be called once while the screen width is in or out of range, respectively.
+
 
 ## How
 
