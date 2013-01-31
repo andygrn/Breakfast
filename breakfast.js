@@ -5,9 +5,15 @@ function Breakfast( breakpoint_array ){
 		this.addBreakPoints( breakpoint_array );
 	}
 	var _self = this;
-	window.addEventListener( 'resize', function(){
+	var event_handler = function(){
 		_self.checkBreaks();
-	} );
+	};
+	if( window.addEventListener ){
+		window.addEventListener( 'resize', event_handler, false );
+	}
+	else if( window.attachEvent ){
+		window.attachEvent( 'onresize', event_handler );
+	}
 }
 
 Breakfast.prototype.addBreakPoints = function( breakpoint_array ){
@@ -28,7 +34,7 @@ Breakfast.prototype.addBreakPoints = function( breakpoint_array ){
 };
 
 Breakfast.prototype.checkBreaks = function(){
-	var window_width = window.innerWidth;
+	var window_width = window.innerWidth || document.documentElement.clientWidth;
 	for( var i = 0, b; b = this.breakpoints[i]; i += 1 ){
 		if( window_width >= b.min && window_width <= b.max ){
 			b.f_off.reset();
