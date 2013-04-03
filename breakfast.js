@@ -35,15 +35,23 @@ Breakfast.prototype.addBreakPoints = function( breakpoint_array ){
 
 Breakfast.prototype.checkBreaks = function(){
 	var window_width = window.innerWidth || document.documentElement.clientWidth;
+	var offs = [];
+	var ons = [];
 	for( var i = 0, b; b = this.breakpoints[i]; i += 1 ){
 		if( window_width >= b.min && window_width <= b.max ){
 			b.f_off.reset();
-			b.f_on();
+			ons.push( b.f_on );
 		}
 		else{
 			b.f_on.reset();
-			b.f_off();
+			offs.push( b.f_off );
 		}
+	}
+	for( var i = 0, f; f = offs[i]; i += 1 ){
+		f();
+	}
+	for( var i = 0, f; f = ons[i]; i += 1 ){
+		f();
 	}
 };
 
